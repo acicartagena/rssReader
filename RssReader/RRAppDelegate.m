@@ -7,12 +7,19 @@
 //
 
 #import "RRAppDelegate.h"
+#import "RRViewController.h"
+
+@interface RRAppDelegate()
+@property (nonatomic,strong) UINavigationController *navigationController;
+
+@end
 
 @implementation RRAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
     return YES;
 }
 							

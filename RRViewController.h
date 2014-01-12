@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RRRssFeed.h"
 
-@interface RRViewController : UIViewController
+@interface RRViewController : UITableViewController
+
+@property (nonatomic,strong) RRRssFeed *feed;
 
 @end
