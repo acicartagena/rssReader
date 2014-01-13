@@ -9,6 +9,7 @@
 #import "RRViewController.h"
 #import "RRRssFeed.h"
 #import "RRRssEntryCell.h"
+#import "RRRssEntry.h"
 
 @interface RRViewController ()
 
@@ -45,7 +46,9 @@
 
 -(void) refresh:(id)sender{
     NSLog(@"refresh");
-    
+    [self.feed fetchData:^{
+        [self.tableView reloadData];
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -73,11 +76,11 @@
     static NSString *CellIdentifier = @"Cell";
     RRRssEntryCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    NSDictionary *cellData = [[self.feed elementsArray] objectAtIndex:[indexPath row]];
+    RRRssEntry *cellData = [[self.feed elementsArray] objectAtIndex:[[self.feed elementsArray] count]-[indexPath row]-1];
 
-    cell.title.text = [cellData objectForKey:@"title"];
-    cell.description.text = [cellData objectForKey:@"description"];
-    cell.pubDate.text = [cellData objectForKey:@"pubDate"];
+    cell.title.text = [cellData title];
+    cell.description.text = [cellData descr];
+    cell.pubDate.text = [cellData pubDate];
     
     return cell;
 }
