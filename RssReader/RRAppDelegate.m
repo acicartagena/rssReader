@@ -8,6 +8,7 @@
 
 #import "RRAppDelegate.h"
 #import "RRViewController.h"
+#import "RRRssEntry.h"
 
 @interface RRAppDelegate()
 @property (nonatomic,strong) UINavigationController *navigationController;
@@ -15,6 +16,10 @@
 @end
 
 @implementation RRAppDelegate
+
+@synthesize managedObjectContext = _managedObjectContext;
+@synthesize managedObjectModel = _managedObjectModel;
+@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -48,6 +53,59 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - CoreData 
+-(void) saveContext{
+    NSError *error = nil;
+    NSManagedObjectContext *moc = self.managedObjectContext;
+    if (moc != nil){
+        if ([moc hasChanges] && ![moc save:&error]){
+            NSLog(@"error: %@: %@",error, [error userInfo]);
+        }
+    }
+}
+
+-(NSManagedObjectContext *) managedObjectContext{
+    if(_managedObjectContext != nil){
+        return _managedObjectContext;
+    }
+    
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (coordinator != nil){
+        _managedObjectContext = [[NSManagedObjectContext alloc] init];
+        [_managedObjectContext setPersistentStoreCoordinator:coordinator];
+    }
+    return _managedObjectContext;
+}
+
+-(NSManagedObjectModel *) managedObjectModel{
+    if (_managedObjectModel != nil){
+        return _managedObjectModel;
+    }
+    NSURL *modelUrl = [[NSBundle mainBundle] URLForResource:@"RssEntry" withExtension:@"momd"];
+    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelUrl];
+    return _managedObjectModel;
+}
+
+- (NSPersistentStoreCoordinator *) persistentStoreCoordinator{
+    if (_persistentStoreCoordinator != nil){
+        return _persistentStoreCoordinator;
+    }
+    
+    NSURL *storeUrl = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"RssEntry.sqlite"];
+    NSError *error = nil;
+    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+    if (([_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:nil error:&error])){
+        NSLog(@"error: %@: %@",error, [error userInfo]);
+    }
+    
+    return _persistentStoreCoordinator;
+}
+
+-(NSURL *)applicationDocumentsDirectory{
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
+                                                   inDomains:NSUserDomainMask] lastObject];
 }
 
 @end

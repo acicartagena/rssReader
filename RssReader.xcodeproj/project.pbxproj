@@ -14,6 +14,9 @@
 		5449FB9C1883AAC300C22954 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 5449FB921883AAC300C22954 /* UIImageView+AFNetworking.m */; };
 		5449FB9D1883AAC300C22954 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 5449FB951883AAC300C22954 /* UIProgressView+AFNetworking.m */; };
 		5449FB9E1883AAC300C22954 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 5449FB971883AAC300C22954 /* UIWebView+AFNetworking.m */; };
+		5449FBA11883D6C700C22954 /* RssEntry.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5449FB9F1883D6C700C22954 /* RssEntry.xcdatamodeld */; };
+		5449FBA41883D88B00C22954 /* RRRssEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 5449FBA31883D88B00C22954 /* RRRssEntry.m */; };
+		5449FBA91883D9A400C22954 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5449FBA81883D9A400C22954 /* CoreData.framework */; };
 		60629169187FE553000C8900 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60629168187FE553000C8900 /* Foundation.framework */; };
 		6062916B187FE553000C8900 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6062916A187FE553000C8900 /* CoreGraphics.framework */; };
 		6062916D187FE553000C8900 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6062916C187FE553000C8900 /* UIKit.framework */; };
@@ -70,6 +73,10 @@
 		5449FB951883AAC300C22954 /* UIProgressView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIProgressView+AFNetworking.m"; sourceTree = "<group>"; };
 		5449FB961883AAC300C22954 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		5449FB971883AAC300C22954 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
+		5449FBA01883D6C700C22954 /* RssEntry.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RssEntry.xcdatamodel; sourceTree = "<group>"; };
+		5449FBA21883D88B00C22954 /* RRRssEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRRssEntry.h; sourceTree = "<group>"; };
+		5449FBA31883D88B00C22954 /* RRRssEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRRssEntry.m; sourceTree = "<group>"; };
+		5449FBA81883D9A400C22954 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		60629165187FE553000C8900 /* RssReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RssReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60629168187FE553000C8900 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6062916A187FE553000C8900 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -122,6 +129,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5449FBA91883D9A400C22954 /* CoreData.framework in Frameworks */,
 				606291CC187FF566000C8900 /* SystemConfiguration.framework in Frameworks */,
 				606291AD187FF42F000C8900 /* MobileCoreServices.framework in Frameworks */,
 				606291AB187FF428000C8900 /* Security.framework in Frameworks */,
@@ -166,6 +174,36 @@
 			path = "UIKit+AFNetworking";
 			sourceTree = "<group>";
 		};
+		5449FBA51883D89B00C22954 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5449FBA21883D88B00C22954 /* RRRssEntry.h */,
+				5449FBA31883D88B00C22954 /* RRRssEntry.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		5449FBA61883D8A000C22954 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6062917A187FE554000C8900 /* Main.storyboard */,
+				606291A4187FEB81000C8900 /* RRRssEntryCell.h */,
+				606291A5187FEB81000C8900 /* RRRssEntryCell.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		5449FBA71883D8A600C22954 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6062919D187FE58E000C8900 /* RRViewController.h */,
+				6062919E187FE58E000C8900 /* RRViewController.m */,
+				606291A7187FF0E5000C8900 /* RRRssFeed.h */,
+				606291A8187FF0E5000C8900 /* RRRssFeed.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		6062915C187FE553000C8900 = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +228,7 @@
 		60629167187FE553000C8900 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5449FBA81883D9A400C22954 /* CoreData.framework */,
 				606291CB187FF566000C8900 /* SystemConfiguration.framework */,
 				606291AC187FF42F000C8900 /* MobileCoreServices.framework */,
 				606291AA187FF428000C8900 /* Security.framework */,
@@ -204,17 +243,14 @@
 		6062916E187FE553000C8900 /* RssReader */ = {
 			isa = PBXGroup;
 			children = (
+				5449FBA71883D8A600C22954 /* Controller */,
+				5449FBA61883D8A000C22954 /* View */,
+				5449FBA51883D89B00C22954 /* Model */,
 				60629177187FE553000C8900 /* RRAppDelegate.h */,
 				60629178187FE554000C8900 /* RRAppDelegate.m */,
-				6062917A187FE554000C8900 /* Main.storyboard */,
-				6062919D187FE58E000C8900 /* RRViewController.h */,
-				6062919E187FE58E000C8900 /* RRViewController.m */,
-				606291A7187FF0E5000C8900 /* RRRssFeed.h */,
-				606291A8187FF0E5000C8900 /* RRRssFeed.m */,
-				606291A4187FEB81000C8900 /* RRRssEntryCell.h */,
-				606291A5187FEB81000C8900 /* RRRssEntryCell.m */,
 				60629180187FE554000C8900 /* Images.xcassets */,
 				6062916F187FE553000C8900 /* Supporting Files */,
+				5449FB9F1883D6C700C22954 /* RssEntry.xcdatamodeld */,
 			);
 			path = RssReader;
 			sourceTree = "<group>";
@@ -388,7 +424,9 @@
 				5449FB9C1883AAC300C22954 /* UIImageView+AFNetworking.m in Sources */,
 				606291A9187FF0E5000C8900 /* RRRssFeed.m in Sources */,
 				5449FB9A1883AAC300C22954 /* UIAlertView+AFNetworking.m in Sources */,
+				5449FBA11883D6C700C22954 /* RssEntry.xcdatamodeld in Sources */,
 				606291C3187FF4FD000C8900 /* AFHTTPRequestOperationManager.m in Sources */,
+				5449FBA41883D88B00C22954 /* RRRssEntry.m in Sources */,
 				606291C6187FF4FD000C8900 /* AFSecurityPolicy.m in Sources */,
 				606291A6187FEB81000C8900 /* RRRssEntryCell.m in Sources */,
 				60629175187FE553000C8900 /* main.m in Sources */,
@@ -622,6 +660,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		5449FB9F1883D6C700C22954 /* RssEntry.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5449FBA01883D6C700C22954 /* RssEntry.xcdatamodel */,
+			);
+			currentVersion = 5449FBA01883D6C700C22954 /* RssEntry.xcdatamodel */;
+			path = RssEntry.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 6062915D187FE553000C8900 /* Project object */;
 }

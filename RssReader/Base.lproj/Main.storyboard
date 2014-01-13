@@ -44,6 +44,7 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <gestureRecognizers/>
                                 <connections>
                                     <outlet property="description" destination="HtG-QJ-CWt" id="y1m-jI-WWf"/>
                                     <outlet property="pubDate" destination="0Ye-6n-Tcv" id="O57-uF-ToF"/>

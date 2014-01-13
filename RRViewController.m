@@ -32,7 +32,6 @@
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
      self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                                initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
                                                target:self
@@ -74,19 +73,18 @@
     static NSString *CellIdentifier = @"Cell";
     RRRssEntryCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-//    if (cell == nil){
-//        cell = [[RRRssEntryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-//    }
     NSDictionary *cellData = [[self.feed elementsArray] objectAtIndex:[indexPath row]];
-    NSLog(@"configure cell for:%@",cellData);
-    // Configure the cell...
-    //cell.title = (UILabel *)[cell viewWithTag:100];
+
     cell.title.text = [cellData objectForKey:@"title"];
     cell.description.text = [cellData objectForKey:@"description"];
     cell.pubDate.text = [cellData objectForKey:@"pubDate"];
     
     return cell;
 }
+
+//-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    
+//}
 
 /*
 // Override to support conditional editing of the table view.

@@ -8,6 +8,9 @@
 
 #import "RRRssFeed.h"
 #import "AFNetworking.h"
+#import "RRRssEntry.h"
+#import <CoreData/CoreData.h>
+#import "RRAppDelegate.h"
 
 
 @implementation RRRssFeed
@@ -44,25 +47,10 @@
           //
           NSLog(@"error:%@",error);
       }];
-//    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
-//    operation.responseSerializer = [AFXMLParserResponseSerializer serializer];
-//    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-//        //code
-//        NSLog(@"response: %@",responseObject);
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//        //<#code#>
-//        NSLog(@"error: %@",error);
-//    }];
-//    [operation start];
 }
 
 #pragma mark NSXMLParser Delegate Methods
 -(void) parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict{
-    
-    //NSLog(@"element name:%@",elementName);
-    //if ([elementName isEqualToString:@"item"]){
-    //    temp = [[NSMutableDictionary alloc] init];
-    //}
     
     if ([elementName isEqualToString:@"media:thumbnail"]){
         media = [[attributeDict objectForKey:@"url"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -111,9 +99,9 @@
             media = @" ";
         }
         temp = @{@"title":title, @"description":description, @"link":link,@"pubDate":pubDate,@"mediaLink":media};
-        //NSLog(@"media:%@",media);
+        
         NSLog(@"item ! temp:%@",temp);
-        [self.elementsArray addObject:temp];
+        [self save:temp];
         
         temp = nil;
         title = nil;
@@ -122,8 +110,58 @@
         pubDate = nil;
         media = nil;
         currentElementValue = nil;
-        
     }
+}
+
+-(void) save:(NSDictionary *)entry{
+    RRAppDelegate *appDelegate = (RRAppDelegate*)[[UIApplication sharedApplication] delegate];
+    
+    NSEntityDescription *entityDescr = [NSEntityDescription entityForName:@"RRRssEntry" inManagedObjectContext:[appDelegate managedObjectContext]];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:entityDescr];
+    
+    NSError *fetchError = nil;
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(title ==  %@)",entry[@"title"]];
+    [fetchRequest setPredicate:predicate];
+    NSArray *array = [[appDelegate managedObjectContext] executeFetchRequest:fetchRequest error:&fetchError];
+    
+    if (array == nil){
+        NSLog(@"error: %@:%@",fetchError,[fetchError userInfo]);
+    }
+    
+    if ([array count] > 0){
+        NSLog(@"entry %@ exists",[(RRRssEntry *)[array firstObject] title]);
+        return;
+    }
+    
+    [self.elementsArray addObject:temp];
+    
+    RRRssEntry *newEntry = [NSEntityDescription insertNewObjectForEntityForName:@"RRRssEntry"
+                                                      inManagedObjectContext:[appDelegate managedObjectContext]];
+    if (newEntry != nil){
+        newEntry.title = entry[@"title"];
+        newEntry.descr = entry[@"description"];
+        newEntry.link = entry[@"link"];
+        newEntry.pubDate = entry[@"pubDate"];
+        newEntry.mediaLink = entry[@"mediaLink"];
+        
+        NSError *savingError = nil;
+        
+        if ([[appDelegate managedObjectContext] save:&savingError]){
+            NSLog(@"successfully saved the context");
+        }else{
+            NSLog(@"error: %@: %@",savingError, [savingError userInfo]);
+        }
+    }else{
+        NSLog(@"Failed to create the new rss entity");
+    }
+                        
+}
+
+-(bool) checkIfExisting{
+    
+    return true;
 }
 
  
