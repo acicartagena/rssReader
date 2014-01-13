@@ -30,7 +30,6 @@
 		6062918A187FE554000C8900 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6062916C187FE553000C8900 /* UIKit.framework */; };
 		60629192187FE554000C8900 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 60629190187FE554000C8900 /* InfoPlist.strings */; };
 		60629194187FE554000C8900 /* RssReaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 60629193187FE554000C8900 /* RssReaderTests.m */; };
-		6062919F187FE58E000C8900 /* RRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6062919E187FE58E000C8900 /* RRViewController.m */; };
 		606291A6187FEB81000C8900 /* RRRssEntryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 606291A5187FEB81000C8900 /* RRRssEntryCell.m */; };
 		606291A9187FF0E5000C8900 /* RRRssFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 606291A8187FF0E5000C8900 /* RRRssFeed.m */; };
 		606291AB187FF428000C8900 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 606291AA187FF428000C8900 /* Security.framework */; };
@@ -45,6 +44,7 @@
 		606291C9187FF4FD000C8900 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 606291BF187FF4FD000C8900 /* AFURLResponseSerialization.m */; };
 		606291CA187FF4FD000C8900 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 606291C1187FF4FD000C8900 /* AFURLSessionManager.m */; };
 		606291CC187FF566000C8900 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 606291CB187FF566000C8900 /* SystemConfiguration.framework */; };
+		60BC6F1118842DBC00E5060A /* RRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60BC6F1018842DBC00E5060A /* RRViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,8 +94,6 @@
 		6062918F187FE554000C8900 /* RssReaderTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RssReaderTests-Info.plist"; sourceTree = "<group>"; };
 		60629191187FE554000C8900 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		60629193187FE554000C8900 /* RssReaderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RssReaderTests.m; sourceTree = "<group>"; };
-		6062919D187FE58E000C8900 /* RRViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RRViewController.h; path = ../RRViewController.h; sourceTree = "<group>"; };
-		6062919E187FE58E000C8900 /* RRViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RRViewController.m; path = ../RRViewController.m; sourceTree = "<group>"; };
 		606291A4187FEB81000C8900 /* RRRssEntryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRRssEntryCell.h; sourceTree = "<group>"; };
 		606291A5187FEB81000C8900 /* RRRssEntryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRRssEntryCell.m; sourceTree = "<group>"; };
 		606291A7187FF0E5000C8900 /* RRRssFeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRRssFeed.h; sourceTree = "<group>"; };
@@ -122,6 +120,8 @@
 		606291C0187FF4FD000C8900 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		606291C1187FF4FD000C8900 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		606291CB187FF566000C8900 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		60BC6F0F18842DBC00E5060A /* RRViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRViewController.h; sourceTree = "<group>"; };
+		60BC6F1018842DBC00E5060A /* RRViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,8 +196,8 @@
 		5449FBA71883D8A600C22954 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				6062919D187FE58E000C8900 /* RRViewController.h */,
-				6062919E187FE58E000C8900 /* RRViewController.m */,
+				60BC6F0F18842DBC00E5060A /* RRViewController.h */,
+				60BC6F1018842DBC00E5060A /* RRViewController.m */,
 				606291A7187FF0E5000C8900 /* RRRssFeed.h */,
 				606291A8187FF0E5000C8900 /* RRRssFeed.m */,
 			);
@@ -418,11 +418,11 @@
 				5449FB9D1883AAC300C22954 /* UIProgressView+AFNetworking.m in Sources */,
 				606291CA187FF4FD000C8900 /* AFURLSessionManager.m in Sources */,
 				606291C8187FF4FD000C8900 /* AFURLRequestSerialization.m in Sources */,
-				6062919F187FE58E000C8900 /* RRViewController.m in Sources */,
 				606291C9187FF4FD000C8900 /* AFURLResponseSerialization.m in Sources */,
 				60629179187FE554000C8900 /* RRAppDelegate.m in Sources */,
 				5449FB9C1883AAC300C22954 /* UIImageView+AFNetworking.m in Sources */,
 				606291A9187FF0E5000C8900 /* RRRssFeed.m in Sources */,
+				60BC6F1118842DBC00E5060A /* RRViewController.m in Sources */,
 				5449FB9A1883AAC300C22954 /* UIAlertView+AFNetworking.m in Sources */,
 				5449FBA11883D6C700C22954 /* RssEntry.xcdatamodeld in Sources */,
 				606291C3187FF4FD000C8900 /* AFHTTPRequestOperationManager.m in Sources */,
