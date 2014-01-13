@@ -9,6 +9,14 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
+//constants
+#define BLOCKS 1
+#define DELEGATE 2
+#define NOTIF 3
+#define KVO 4
+
+#define STRATEGY BLOCKS
+
 @class RRViewController;
 @interface RRAppDelegate : UIResponder <UIApplicationDelegate>
 

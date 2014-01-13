@@ -39,16 +39,30 @@
                                                action:@selector(refresh:)];
     
     self.feed = [[RRRssFeed alloc] init];
+#if STRATEGY == BLOCKS
     [self.feed fetchData:^{
         [self.tableView reloadData];
+    }OnError:^(NSError *error){
+        NSLog(@"error: %@: %@",error,[error userInfo]);
     }];
+#elif STRATEGY == DELEGATE
+    [self.feed fetchData];
+    [self.feed setDelegate:self];
+#endif
+    
 }
 
 -(void) refresh:(id)sender{
     NSLog(@"refresh");
+#if STRATEGY == BLOCKS
     [self.feed fetchData:^{
         [self.tableView reloadData];
+    }OnError:^(NSError *error){
+        NSLog(@"error: %@: %@",error,[error userInfo]);
     }];
+#elif STRATEGY == DELEGATE
+    [self.feed fetchData];
+#endif
 }
 
 - (void)didReceiveMemoryWarning
@@ -56,6 +70,17 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#if STRATEGY == DELEGATE
+#pragma mark RRRssFeed Delegate methods
+-(void)rssFeedFetchSuccess{
+    [self.tableView reloadData];
+}
+
+-(void)rssFeedFetchError:(NSError *)error{
+    NSLog(@"error:%@ :%@",error,[error userInfo]);
+}
+#endif
 
 #pragma mark - Table view data source
 

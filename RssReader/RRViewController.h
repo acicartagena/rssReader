@@ -9,7 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "RRRssFeed.h"
 
+
+#if STRATEGY == DELEGATE
+@interface RRViewController : UITableViewController <RRRssFeedDelegate>
+#else
 @interface RRViewController : UITableViewController
+#endif
 
 @property (nonatomic,strong) RRRssFeed *feed;
 

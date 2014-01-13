@@ -10,7 +10,8 @@
 #import "AFNetworking.h"
 #import "RRRssEntry.h"
 #import <CoreData/CoreData.h>
-#import "RRAppDelegate.h"
+#import "RRViewController.h"
+
 
 @implementation RRRssFeed
 
@@ -26,7 +27,11 @@
     return self;
 }
 
--(void) fetchData:(void(^)(void))onSuccess{
+#if STRATEGY == BLOCKS
+-(void) fetchData:(void(^)(void))onSuccess OnError:(void(^)(NSError *))errorMethod{
+#elif STRATEGY == DELEGATE
+-(void) fetchData{
+#endif
     NSLog(@"fetch Data");
 
     NSURL *baseUrl = [NSURL URLWithString:@"http://feeds.bbci.co.uk"];
@@ -44,10 +49,18 @@
              [parser setDelegate:self];
              [parser parse];
              NSLog(@"finished parsing");
+#if STRATEGY == BLOCKS
              onSuccess();
+#elif STRATEGY == DELEGATE
+             [self.delegate rssFeedFetchSuccess];
+#endif
       }
          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-          
+#if STRATEGY == BLOCKS
+             errorMethod(error);
+#elif STRATEGY == DELEGATE
+             [self.delegate rssFeedFetchError:error];
+#endif
              NSLog(@"error:%@",error);
       }];
 }
@@ -130,6 +143,9 @@
     NSArray *array = [[appDelegate managedObjectContext] executeFetchRequest:fetchRequest error:&fetchError];
     
     if (array == nil){
+#if STRATEGY == DELEGATE
+        [self.delegate rssFeedFetchError:fetchError];
+#endif
         NSLog(@"error: %@:%@",fetchError,[fetchError userInfo]);
     }
     
@@ -156,6 +172,9 @@
             NSLog(@"successfully saved the context");
             [self.elementsArray addObject:newEntry];
         }else{
+#if STRATEGY == DELEGATE
+            [self.delegate rssFeedFetchError:savingError];
+#endif
             NSLog(@"error: %@: %@",savingError, [savingError userInfo]);
         }
     }else{
@@ -175,6 +194,9 @@
     NSArray *array = [[appDelegate managedObjectContext] executeFetchRequest:fetchRequest error:&fetchError];
     
     if (array == nil){
+#if STRATEGY == DELEGATE
+        [self.delegate rssFeedFetchError:fetchError];
+#endif
         NSLog(@"error: %@:%@",fetchError,[fetchError userInfo]);
     }
 

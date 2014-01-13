@@ -8,6 +8,19 @@
 
 #import <Foundation/Foundation.h>
 #import "RRRssEntryCell.h"
+#import "RRAppDelegate.h"
+
+@protocol RRRssFeedDelegate <NSObject>
+
+@required
+-(void) rssFeedFetchSuccess;
+-(void) rssFeedFetchError:(NSError *)error;
+
+@optional
+-(void) rssFeedFetchFail;
+-(void) rssFeedFetchCancel;
+
+@end
 
 @interface RRRssFeed : NSObject<NSXMLParserDelegate>{
     NSString *title;
@@ -17,12 +30,19 @@
     NSString *media;
     NSDictionary *temp;
     NSMutableString *currentElementValue;
-    bool skipElement;
     
 }
 
 @property (nonatomic,strong) NSMutableArray *elementsArray;
+@property (nonatomic,weak) id<RRRssFeedDelegate> delegate;
 
--(void) fetchData:(void(^)(void))onSuccess;
+#if STRATEGY == BLOCKS
+-(void) fetchData:(void(^)(void))onSuccess OnError:(void(^)(NSError *))errorMethod;
+#elif STRATEGY == DELEGATE
+-(void) fetchData;
+#endif
 
 @end
+
+
+
