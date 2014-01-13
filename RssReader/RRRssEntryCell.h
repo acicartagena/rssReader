@@ -7,14 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIImageView+AFNetworking.h"
 
 @interface RRRssEntryCell : UITableViewCell
 
-@property (nonatomic,strong) NSString *title;
+@property (nonatomic,weak) IBOutlet UILabel *title;
+@property (nonatomic,weak) IBOutlet UILabel *pubDate;
+@property (nonatomic,weak) IBOutlet UILabel *description;
+
+@property (nonatomic,strong) UILabel *mediaLink;
 @property (nonatomic,strong) NSString *link;
 @property (nonatomic,strong) NSString *category;
-@property (nonatomic,strong) NSString *pubDate;
-@property (nonatomic,strong) NSString *description;
-@property (nonatomic,strong) NSString *mediaLink;
+
 
 @end

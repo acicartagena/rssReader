@@ -23,6 +23,6 @@
 
 @property (nonatomic,strong) NSMutableArray *elementsArray;
 
--(void) fetchData;
+-(void) fetchData:(void(^)(void))onSuccess;
 
 @end

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>37DB296E-F52A-4C7B-AC47-32AD2A1510F1</string>
+	<key>IDESourceControlProjectName</key>
+	<string>RssReader</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>24B106AB-1363-45BA-8969-5BB461E48380</key>
+		<string>https://github.com/acicartagena/rssReader.git</string>
+		<key>516D9F38-88E3-4D02-891C-AA7E1D0CF672</key>
+		<string>https://github.com/acicartagena/rssReader.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>RssReader.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>24B106AB-1363-45BA-8969-5BB461E48380</key>
+		<string>../..</string>
+		<key>516D9F38-88E3-4D02-891C-AA7E1D0CF672</key>
+		<string>../../../../desktop/rssReader</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/acicartagena/rssReader.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>24B106AB-1363-45BA-8969-5BB461E48380</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>24B106AB-1363-45BA-8969-5BB461E48380</string>
+			<key>IDESourceControlWCCName</key>
+			<string>rssReader</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>516D9F38-88E3-4D02-891C-AA7E1D0CF672</string>
+			<key>IDESourceControlWCCName</key>
+			<string>rssReader</string>
+		</dict>
+	</array>
+</dict>
+</plist>

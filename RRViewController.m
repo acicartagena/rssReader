@@ -39,7 +39,9 @@
                                                action:@selector(refresh:)];
     
     self.feed = [[RRRssFeed alloc] init];
-    [self.feed fetchData];
+    [self.feed fetchData:^{
+        [self.tableView reloadData];
+    }];
 }
 
 -(void) refresh:(id)sender{
@@ -70,10 +72,18 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    RRRssEntryCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    RRRssEntryCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
+//    if (cell == nil){
+//        cell = [[RRRssEntryCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+//    }
+    NSDictionary *cellData = [[self.feed elementsArray] objectAtIndex:[indexPath row]];
+    NSLog(@"configure cell for:%@",cellData);
     // Configure the cell...
-    cell.title = 
+    //cell.title = (UILabel *)[cell viewWithTag:100];
+    cell.title.text = [cellData objectForKey:@"title"];
+    cell.description.text = [cellData objectForKey:@"description"];
+    cell.pubDate.text = [cellData objectForKey:@"pubDate"];
     
     return cell;
 }

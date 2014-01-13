@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5449FB981883AAC300C22954 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5449FB8A1883AAC300C22954 /* AFNetworkActivityIndicatorManager.m */; };
+		5449FB991883AAC300C22954 /* UIActivityIndicatorView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 5449FB8C1883AAC300C22954 /* UIActivityIndicatorView+AFNetworking.m */; };
+		5449FB9A1883AAC300C22954 /* UIAlertView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 5449FB8E1883AAC300C22954 /* UIAlertView+AFNetworking.m */; };
+		5449FB9B1883AAC300C22954 /* UIButton+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 5449FB901883AAC300C22954 /* UIButton+AFNetworking.m */; };
+		5449FB9C1883AAC300C22954 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 5449FB921883AAC300C22954 /* UIImageView+AFNetworking.m */; };
+		5449FB9D1883AAC300C22954 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 5449FB951883AAC300C22954 /* UIProgressView+AFNetworking.m */; };
+		5449FB9E1883AAC300C22954 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 5449FB971883AAC300C22954 /* UIWebView+AFNetworking.m */; };
 		60629169187FE553000C8900 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60629168187FE553000C8900 /* Foundation.framework */; };
 		6062916B187FE553000C8900 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6062916A187FE553000C8900 /* CoreGraphics.framework */; };
 		6062916D187FE553000C8900 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6062916C187FE553000C8900 /* UIKit.framework */; };
@@ -48,6 +55,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5449FB891883AAC300C22954 /* AFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
+		5449FB8A1883AAC300C22954 /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
+		5449FB8B1883AAC300C22954 /* UIActivityIndicatorView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActivityIndicatorView+AFNetworking.h"; sourceTree = "<group>"; };
+		5449FB8C1883AAC300C22954 /* UIActivityIndicatorView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActivityIndicatorView+AFNetworking.m"; sourceTree = "<group>"; };
+		5449FB8D1883AAC300C22954 /* UIAlertView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+AFNetworking.h"; sourceTree = "<group>"; };
+		5449FB8E1883AAC300C22954 /* UIAlertView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+AFNetworking.m"; sourceTree = "<group>"; };
+		5449FB8F1883AAC300C22954 /* UIButton+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+AFNetworking.h"; sourceTree = "<group>"; };
+		5449FB901883AAC300C22954 /* UIButton+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+AFNetworking.m"; sourceTree = "<group>"; };
+		5449FB911883AAC300C22954 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
+		5449FB921883AAC300C22954 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
+		5449FB931883AAC300C22954 /* UIKit+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIKit+AFNetworking.h"; sourceTree = "<group>"; };
+		5449FB941883AAC300C22954 /* UIProgressView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIProgressView+AFNetworking.h"; sourceTree = "<group>"; };
+		5449FB951883AAC300C22954 /* UIProgressView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIProgressView+AFNetworking.m"; sourceTree = "<group>"; };
+		5449FB961883AAC300C22954 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
+		5449FB971883AAC300C22954 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		60629165187FE553000C8900 /* RssReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RssReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60629168187FE553000C8900 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6062916A187FE553000C8900 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -122,9 +144,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5449FB881883AAC300C22954 /* UIKit+AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				5449FB891883AAC300C22954 /* AFNetworkActivityIndicatorManager.h */,
+				5449FB8A1883AAC300C22954 /* AFNetworkActivityIndicatorManager.m */,
+				5449FB8B1883AAC300C22954 /* UIActivityIndicatorView+AFNetworking.h */,
+				5449FB8C1883AAC300C22954 /* UIActivityIndicatorView+AFNetworking.m */,
+				5449FB8D1883AAC300C22954 /* UIAlertView+AFNetworking.h */,
+				5449FB8E1883AAC300C22954 /* UIAlertView+AFNetworking.m */,
+				5449FB8F1883AAC300C22954 /* UIButton+AFNetworking.h */,
+				5449FB901883AAC300C22954 /* UIButton+AFNetworking.m */,
+				5449FB911883AAC300C22954 /* UIImageView+AFNetworking.h */,
+				5449FB921883AAC300C22954 /* UIImageView+AFNetworking.m */,
+				5449FB931883AAC300C22954 /* UIKit+AFNetworking.h */,
+				5449FB941883AAC300C22954 /* UIProgressView+AFNetworking.h */,
+				5449FB951883AAC300C22954 /* UIProgressView+AFNetworking.m */,
+				5449FB961883AAC300C22954 /* UIWebView+AFNetworking.h */,
+				5449FB971883AAC300C22954 /* UIWebView+AFNetworking.m */,
+			);
+			path = "UIKit+AFNetworking";
+			sourceTree = "<group>";
+		};
 		6062915C187FE553000C8900 = {
 			isa = PBXGroup;
 			children = (
+				5449FB881883AAC300C22954 /* UIKit+AFNetworking */,
 				606291AE187FF4FC000C8900 /* AFNetworking */,
 				6062916E187FE553000C8900 /* RssReader */,
 				6062918D187FE554000C8900 /* RssReaderTests */,
@@ -277,6 +322,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Aci Cartagena";
 				TargetAttributes = {
+					60629164187FE553000C8900 = {
+						DevelopmentTeam = VWW575E2Q5;
+					};
 					60629185187FE554000C8900 = {
 						TestTargetID = 60629164187FE553000C8900;
 					};
@@ -329,18 +377,25 @@
 			files = (
 				606291C7187FF4FD000C8900 /* AFURLConnectionOperation.m in Sources */,
 				606291C2187FF4FD000C8900 /* AFHTTPRequestOperation.m in Sources */,
+				5449FB9B1883AAC300C22954 /* UIButton+AFNetworking.m in Sources */,
 				606291C5187FF4FD000C8900 /* AFNetworkReachabilityManager.m in Sources */,
+				5449FB9D1883AAC300C22954 /* UIProgressView+AFNetworking.m in Sources */,
 				606291CA187FF4FD000C8900 /* AFURLSessionManager.m in Sources */,
 				606291C8187FF4FD000C8900 /* AFURLRequestSerialization.m in Sources */,
 				6062919F187FE58E000C8900 /* RRViewController.m in Sources */,
 				606291C9187FF4FD000C8900 /* AFURLResponseSerialization.m in Sources */,
 				60629179187FE554000C8900 /* RRAppDelegate.m in Sources */,
+				5449FB9C1883AAC300C22954 /* UIImageView+AFNetworking.m in Sources */,
 				606291A9187FF0E5000C8900 /* RRRssFeed.m in Sources */,
+				5449FB9A1883AAC300C22954 /* UIAlertView+AFNetworking.m in Sources */,
 				606291C3187FF4FD000C8900 /* AFHTTPRequestOperationManager.m in Sources */,
 				606291C6187FF4FD000C8900 /* AFSecurityPolicy.m in Sources */,
 				606291A6187FEB81000C8900 /* RRRssEntryCell.m in Sources */,
 				60629175187FE553000C8900 /* main.m in Sources */,
+				5449FB9E1883AAC300C22954 /* UIWebView+AFNetworking.m in Sources */,
 				606291C4187FF4FD000C8900 /* AFHTTPSessionManager.m in Sources */,
+				5449FB991883AAC300C22954 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				5449FB981883AAC300C22954 /* AFNetworkActivityIndicatorManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,10 +522,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RssReader/RssReader-Prefix.pch";
 				INFOPLIST_FILE = "RssReader/RssReader-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -480,10 +538,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RssReader/RssReader-Prefix.pch";
 				INFOPLIST_FILE = "RssReader/RssReader-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -549,6 +610,7 @@
 				60629199187FE554000C8900 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6062919A187FE554000C8900 /* Build configuration list for PBXNativeTarget "RssReaderTests" */ = {
 			isa = XCConfigurationList;
@@ -557,6 +619,7 @@
 				6062919C187FE554000C8900 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

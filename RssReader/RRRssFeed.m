@@ -20,17 +20,15 @@
     return self;
 }
 
--(void) fetchData{
+-(void) fetchData:(void(^)(void))onSuccess{
     NSLog(@"fetch Data");
-    //NSURL *url = [NSURL URLWithString:@"http://feeds.bbci.co.uk/news/rss.xml?edition=int#"];
+
     NSURL *baseUrl = [NSURL URLWithString:@"http://feeds.bbci.co.uk"];
-    ///news?pz=1&cf=all&ned=en_ph&hl=en&output=rss
-    //NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
-    //AFXMLParserResponseSerializer
     NSDictionary *parms = [[NSDictionary alloc] initWithObjectsAndKeys:@"int",@"edition", nil];
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseUrl];
     [manager setResponseSerializer:[AFXMLParserResponseSerializer new]];
     [[manager responseSerializer] setAcceptableContentTypes:[NSSet setWithObject:@"application/rss+xml"]];
+    
     NSLog(@"afhttp response serializer:%@",[manager responseSerializer]);
     [manager GET:@"/news/rss.xml"
       parameters:parms
@@ -40,6 +38,7 @@
              NSXMLParser *parser = (NSXMLParser *)responseObject;
              [parser setDelegate:self];
              [parser parse];
+             onSuccess();
       }
          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           //
@@ -66,7 +65,7 @@
     //}
     
     if ([elementName isEqualToString:@"media:thumbnail"]){
-        media = [attributeDict objectForKey:@"url"];
+        media = [[attributeDict objectForKey:@"url"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     }
     
 }
@@ -83,27 +82,35 @@
 -(void) parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName{
 
     if ([elementName isEqualToString:@"title"]){
-        title = currentElementValue;
+        title = [currentElementValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         //NSLog(@"title:%@",title);
         currentElementValue = nil;
         
     }else if ([elementName isEqualToString:@"description"]){
-        description = currentElementValue;
+        description = [currentElementValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         //NSLog(@"description:%@",description);
         currentElementValue = nil;
         
     }else if ([elementName isEqualToString:@"guid"]){
-        link = currentElementValue;
+        link = [currentElementValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         //NSLog(@"link:%@",link);
         currentElementValue = nil;
         
     }else if ([elementName isEqualToString:@"pubDate"]){
-        pubDate = currentElementValue;
+        pubDate = [currentElementValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         //NSLog(@"pubdate:%@",pubDate);
         currentElementValue = nil;
         
     }else if ([elementName isEqualToString:@"item"]){
-        temp = [[NSDictionary alloc] initWithObjectsAndKeys:@"title",title,@"description",description,@"link",link,@"pubDate",pubDate,@"mediaLink",media, nil];
+        NSLog(@"title:%@",title);
+        NSLog(@"description:%@",description);
+        NSLog(@"link:%@",link);
+        NSLog(@"pubDate:%@",pubDate);
+        NSLog(@"media link:%@",media);
+        if (media == nil){
+            media = @" ";
+        }
+        temp = @{@"title":title, @"description":description, @"link":link,@"pubDate":pubDate,@"mediaLink":media};
         //NSLog(@"media:%@",media);
         NSLog(@"item ! temp:%@",temp);
         [self.elementsArray addObject:temp];
@@ -119,6 +126,6 @@
     }
 }
 
-
+ 
 
 @end
