@@ -39,18 +39,22 @@
                                                action:@selector(refresh:)];
     
     self.feed = [[RRRssFeed alloc] init];
-#if STRATEGY == BLOCKS
-    [self.feed fetchData:^{
-        [self.tableView reloadData];
-    }OnError:^(NSError *error){
-        NSLog(@"error: %@: %@",error,[error userInfo]);
-    }];
-#elif STRATEGY == DELEGATE
-    [self.feed fetchData];
-    [self.feed setDelegate:self];
-#endif
     
+#if STRATEGY == DELEGATE
+    [self.feed setDelegate:self];
+#elif STRATEGY == NOTIF
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(rssFeedFetchSuccess)
+                                                 name:@"rssFeedFetchSuccess"
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(rssFeedFetchError)
+                                                 name:@"rssFeedFetchError"
+                                               object:nil];
+#endif
+    [self refresh:nil];
 }
+
 
 -(void) refresh:(id)sender{
     NSLog(@"refresh");
@@ -60,7 +64,7 @@
     }OnError:^(NSError *error){
         NSLog(@"error: %@: %@",error,[error userInfo]);
     }];
-#elif STRATEGY == DELEGATE
+#elif STRATEGY == DELEGATE || STRATEGY == NOTIF
     [self.feed fetchData];
 #endif
 }
@@ -71,14 +75,30 @@
     // Dispose of any resources that can be recreated.
 }
 
-#if STRATEGY == DELEGATE
-#pragma mark RRRssFeed Delegate methods
+#if STRATEGY == NOTIF
+#pragma mark - Notification Center methods
 -(void)rssFeedFetchSuccess{
+    NSLog(@"rss feed fetch success");
+    [self.tableView reloadData];
+}
+
+-(void)rssFeedFetchError{
+    NSError *error = [self.feed error];
+    NSLog(@"vc:error:%@ :%@",error,[error userInfo]);
+    
+}
+#endif
+
+
+#if STRATEGY == DELEGATE
+#pragma mark  - RRRssFeed Delegate methods
+-(void)rssFeedFetchSuccess{
+    NSLog(@"rss feed fetch success");
     [self.tableView reloadData];
 }
 
 -(void)rssFeedFetchError:(NSError *)error{
-    NSLog(@"error:%@ :%@",error,[error userInfo]);
+    NSLog(@"vc:error:%@ :%@",error,[error userInfo]);
 }
 #endif
 

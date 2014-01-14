@@ -18,8 +18,10 @@
 -(id) init{
     self = [super init];
     if (self){
-        //self.elementsArray = [[NSMutableArray alloc] init];
         
+#if STRATEGY == NOTIF
+        self.error = nil;
+#endif
         //load existing data from core data
         [self fetchExistingData];
         
@@ -29,7 +31,7 @@
 
 #if STRATEGY == BLOCKS
 -(void) fetchData:(void(^)(void))onSuccess OnError:(void(^)(NSError *))errorMethod{
-#elif STRATEGY == DELEGATE
+#elif STRATEGY == DELEGATE || STRATEGY == NOTIF
 -(void) fetchData{
 #endif
     NSLog(@"fetch Data");
@@ -39,8 +41,6 @@
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseUrl];
     [manager setResponseSerializer:[AFXMLParserResponseSerializer new]];
     [[manager responseSerializer] setAcceptableContentTypes:[NSSet setWithObject:@"application/rss+xml"]];
-    
-    //NSLog(@"afhttp response serializer:%@",[manager responseSerializer]);
     [manager GET:@"/news/rss.xml"
       parameters:parms
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -53,6 +53,9 @@
              onSuccess();
 #elif STRATEGY == DELEGATE
              [self.delegate rssFeedFetchSuccess];
+#elif STRATEGY == NOTIF
+             [[NSNotificationCenter defaultCenter] postNotificationName:@"rssFeedFetchSuccess"
+                                                                 object:self];
 #endif
       }
          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -60,8 +63,11 @@
              errorMethod(error);
 #elif STRATEGY == DELEGATE
              [self.delegate rssFeedFetchError:error];
+#elif STRATEGY == NOTIF
+             self.error = error;
+             [[NSNotificationCenter defaultCenter] postNotificationName:@"rssFeedFetchError"
+                                                                 object:self];
 #endif
-             NSLog(@"error:%@",error);
       }];
 }
 
@@ -106,17 +112,11 @@
         currentElementValue = nil;
         
     }else if ([elementName isEqualToString:@"item"]){
-        //NSLog(@"title:%@",title);
-//        NSLog(@"description:%@",description);
-//        NSLog(@"link:%@",link);
-//        NSLog(@"pubDate:%@",pubDate);
-//        NSLog(@"media link:%@",media);
         if (media == nil){
             media = @" ";
         }
         temp = @{@"title":title, @"description":description, @"link":link,@"pubDate":pubDate,@"mediaLink":media};
-        
-        //NSLog(@"item ! temp:%@",temp);
+
         [self save:temp];
         
         temp = nil;
@@ -128,7 +128,8 @@
         currentElementValue = nil;
     }
 }
-
+    
+#pragma mark - CoreData methods
 -(void) save:(NSDictionary *)entry{
     RRAppDelegate *appDelegate = (RRAppDelegate*)[[UIApplication sharedApplication] delegate];
     
@@ -146,17 +147,21 @@
 #if STRATEGY == DELEGATE
         [self.delegate rssFeedFetchError:fetchError];
 #endif
-        NSLog(@"error: %@:%@",fetchError,[fetchError userInfo]);
+#if STRATEGY == NOTIF
+        self.error = fetchError;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"rssFeedFetchError"
+                                                            object:self];
+#endif
+        //NSLog(@"error: %@:%@",fetchError,[fetchError userInfo]);
     }
     
-    //if array has more than 1 element, entry exists in coredata
+    //if array has atleast 1 element, entry exists in coredata
     if ([array count] > 0){
         //NSLog(@"entry %@ exists",[(RRRssEntry *)[array firstObject] title]);
         return;
     }
     
     //[self.elementsArray addObject:temp];
-    
     RRRssEntry *newEntry = [NSEntityDescription insertNewObjectForEntityForName:@"RRRssEntry"
                                                       inManagedObjectContext:[appDelegate managedObjectContext]];
     if (newEntry != nil){
@@ -175,7 +180,12 @@
 #if STRATEGY == DELEGATE
             [self.delegate rssFeedFetchError:savingError];
 #endif
-            NSLog(@"error: %@: %@",savingError, [savingError userInfo]);
+#if STRATEGY == NOTIF
+            self.error = savingError;
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"rssFeedFetchError"
+                                                                object:self];
+#endif
+            //NSLog(@"error: %@: %@",savingError, [savingError userInfo]);
         }
     }else{
         NSLog(@"Failed to create the new rss entity");
@@ -190,6 +200,7 @@
     NSEntityDescription *entityDescr = [NSEntityDescription entityForName:@"RRRssEntry" inManagedObjectContext:[appDelegate managedObjectContext]];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:entityDescr];
+    
     NSError *fetchError = nil;
     NSArray *array = [[appDelegate managedObjectContext] executeFetchRequest:fetchRequest error:&fetchError];
     
@@ -197,7 +208,12 @@
 #if STRATEGY == DELEGATE
         [self.delegate rssFeedFetchError:fetchError];
 #endif
-        NSLog(@"error: %@:%@",fetchError,[fetchError userInfo]);
+#if STRATEGY == NOTIF
+        self.error = fetchError;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"rssFeedFetchError"
+                                                            object:self];
+#endif
+        //NSLog(@"error: %@:%@",fetchError,[fetchError userInfo]);
     }
 
     self.elementsArray = [[NSMutableArray alloc] initWithArray:array];

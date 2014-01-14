@@ -34,11 +34,16 @@
 }
 
 @property (nonatomic,strong) NSMutableArray *elementsArray;
+#if STRATEGY == DELEGATE
 @property (nonatomic,weak) id<RRRssFeedDelegate> delegate;
+#endif
+#if STRATEGY == NOTIF
+@property (nonatomic,strong) NSError *error;
+#endif
 
 #if STRATEGY == BLOCKS
 -(void) fetchData:(void(^)(void))onSuccess OnError:(void(^)(NSError *))errorMethod;
-#elif STRATEGY == DELEGATE
+#elif STRATEGY == DELEGATE || STRATEGY == NOTIF
 -(void) fetchData;
 #endif
 
