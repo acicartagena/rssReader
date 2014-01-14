@@ -31,7 +31,7 @@
 
 #if STRATEGY == BLOCKS
 -(void) fetchData:(void(^)(void))onSuccess OnError:(void(^)(NSError *))errorMethod{
-#elif STRATEGY == DELEGATE || STRATEGY == NOTIF
+#elif STRATEGY == DELEGATE || STRATEGY == NOTIF || STRATEGY == KVO
 -(void) fetchData{
 #endif
     NSLog(@"fetch Data");
@@ -54,7 +54,7 @@
 #elif STRATEGY == DELEGATE
              [self.delegate rssFeedFetchSuccess];
 #elif STRATEGY == NOTIF
-             [[NSNotificationCenter defaultCenter] postNotificationName:@"rssFeedFetchSuccess"
+             [[NSNotificationCenter defaultCenter] postNotificationName:RSS_FEED_FETCH_SUCCESS
                                                                  object:self];
 #endif
       }
@@ -65,7 +65,7 @@
              [self.delegate rssFeedFetchError:error];
 #elif STRATEGY == NOTIF
              self.error = error;
-             [[NSNotificationCenter defaultCenter] postNotificationName:@"rssFeedFetchError"
+             [[NSNotificationCenter defaultCenter] postNotificationName:RSS_FEED_FETCH_ERROR
                                                                  object:self];
 #endif
       }];
@@ -164,6 +164,7 @@
     //[self.elementsArray addObject:temp];
     RRRssEntry *newEntry = [NSEntityDescription insertNewObjectForEntityForName:@"RRRssEntry"
                                                       inManagedObjectContext:[appDelegate managedObjectContext]];
+    NSLog(@"new entry: title:%@",entry[@"title"]);
     if (newEntry != nil){
         newEntry.title = entry[@"title"];
         newEntry.descr = entry[@"description"];

@@ -15,7 +15,7 @@
 #define NOTIF 3
 #define KVO 4
 
-#define STRATEGY NOTIF
+#define STRATEGY KVO
 
 @class RRViewController;
 @interface RRAppDelegate : UIResponder <UIApplicationDelegate>

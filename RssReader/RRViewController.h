@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "RRRssFeed.h"
 
+#define RSS_FEED_FETCH_SUCCESS @"rssFeedFetchSuccess"
+#define RSS_FEED_FETCH_ERROR @"rssFeedFetchError"
+
+#define RSS_FEED_FETCH_STATUS @"elementsArray"
+
 
 #if STRATEGY == DELEGATE
 @interface RRViewController : UITableViewController <RRRssFeedDelegate>

@@ -45,12 +45,14 @@
 #elif STRATEGY == NOTIF
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(rssFeedFetchSuccess)
-                                                 name:@"rssFeedFetchSuccess"
+                                                 name:RSS_FEED_FETCH_SUCCESS
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(rssFeedFetchError)
-                                                 name:@"rssFeedFetchError"
+                                                 name:RSS_FEED_FETCH_ERROR
                                                object:nil];
+#elif STRATEGY == KVO
+    [self.feed addObserver:self forKeyPath:RSS_FEED_FETCH_STATUS options:(NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld) context:nil];
 #endif
     [self refresh:nil];
 }
@@ -64,7 +66,7 @@
     }OnError:^(NSError *error){
         NSLog(@"error: %@: %@",error,[error userInfo]);
     }];
-#elif STRATEGY == DELEGATE || STRATEGY == NOTIF
+#elif STRATEGY == DELEGATE || STRATEGY == NOTIF || STRATEGY == KVO
     [self.feed fetchData];
 #endif
 }
@@ -102,6 +104,20 @@
 }
 #endif
 
+#if STRATEGY == KVO
+
+-(void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    NSLog(@"KEYPATH:%@",keyPath);
+    if ([keyPath isEqualToString:RSS_FEED_FETCH_STATUS]){
+        NSLog(@"rss feed fetch success");
+        [self.tableView reloadData];
+    }
+}
+-(void) dealloc{
+    [self.feed removeObserver:self forKeyPath:RSS_FEED_FETCH_STATUS];
+}
+#endif
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -129,6 +145,8 @@
     
     return cell;
 }
+
+
 
 //-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 //    

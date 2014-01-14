@@ -40,10 +40,13 @@
 #if STRATEGY == NOTIF
 @property (nonatomic,strong) NSError *error;
 #endif
+#if STRATEGY == KVO
+@property (nonatomic,strong) NSString *status;
+#endif
 
 #if STRATEGY == BLOCKS
 -(void) fetchData:(void(^)(void))onSuccess OnError:(void(^)(NSError *))errorMethod;
-#elif STRATEGY == DELEGATE || STRATEGY == NOTIF
+#elif STRATEGY == DELEGATE || STRATEGY == NOTIF || STRATEGY == KVO
 -(void) fetchData;
 #endif
 
