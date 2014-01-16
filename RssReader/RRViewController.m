@@ -118,6 +118,17 @@
 }
 #endif
 
+#if STRATEGY == NOTIF
+-(void) dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:RSS_FEED_FETCH_SUCCESS
+                                                  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:RSS_FEED_FETCH_ERROR
+                                                  object:nil];
+}
+#endif
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
